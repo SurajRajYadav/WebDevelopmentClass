@@ -1,40 +1,37 @@
-<!-- CSS Outline
-An outline is a line drawn outside the element's border.
-CSS has the followingoutline properties:
-1. outline-style 
-2. outline-color 
-3. outline-width 
-4. outline-offset 
-5. outline -->
+<!-- CSS overflow property control what happens to content that is too big to fit into an area. 
 
+CSS Overflow 
+1. visible (Default. overflow is not clipped)
+2. hidden (The overflow is clipped, and the rest of the content will be invisible)
+3. scroll (the overflow is clipped, ans a scrollbar is added to see the rest of the content) 
+4. auto (similar to scroll, but it adds scrollbars only when necessary) -->
+
+<!-- overflow
+Overflow-x 
+overflow-y  -->
 <!DOCTYPE html>
 <html>
 <head>
 <style>
-p {outline-color:red;}
-
-p.dotted {outline-style: dotted;}
-p.dashed {outline-style: dashed;}
-p.solid {outline-style: solid;}
-p.double {outline-style: double;}
-p.groove {outline-style: groove;}
-p.ridge {outline-style: ridge;}
-p.inset {outline-style: inset;}
-p.outset {outline-style: outset;}
+div {
+  background-color: coral;
+  width: 200px;
+  height: 65px;
+  border: 1px solid black;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
 </style>
 </head>
 <body>
 
-<h2>The outline-style Property</h2>
+<h2>Overflow-x and overflow-y</h2>
 
-<p class="dotted">A dotted outline</p>
-<p class="dashed">A dashed outline</p>
-<p class="solid">A solid outline</p>
-<p class="double">A double outline</p>
-<p class="groove">A groove outline. The effect depends on the outline-color value.</p>
-<p class="ridge">A ridge outline. The effect depends on the outline-color value.</p>
-<p class="inset">An inset outline. The effect depends on the outline-color value.</p>
-<p class="outset">An outset outline. The effect depends on the outline-color value.</p>
+<p>You can also change the overflow of content horizontally or vertically.</p>
+<p>overflow-x specifies what to do with the left/right edges of the content.</p>
+<p>overflow-y specifies what to do with the top/bottom edges of the content.</p>
+
+<div>You can use the overflow property when you want to have better control of the layout. The overflow property specifies what happens if content overflows an element's box.</div>
 
 </body>
 </html>
