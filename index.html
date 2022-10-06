@@ -1,37 +1,58 @@
-<!-- CSS overflow property control what happens to content that is too big to fit into an area. 
+<!-- The z-index property specifies the stack order of an element.
+The z-index property specifies the stack order of an element(which element should be palced in fron of, or behind, the others.)
+An element can have a position or negative stacked order. -->
 
-CSS Overflow 
-1. visible (Default. overflow is not clipped)
-2. hidden (The overflow is clipped, and the rest of the content will be invisible)
-3. scroll (the overflow is clipped, ans a scrollbar is added to see the rest of the content) 
-4. auto (similar to scroll, but it adds scrollbars only when necessary) -->
+<!-- Note: z-index only works on positioned elements (position:values,) and flex items(elemts that are direct children of display:flex elemets)
+Two Way to position image:
+1. With index values
+2. Without index values -->
 
-<!-- overflow
-Overflow-x 
-overflow-y  -->
 <!DOCTYPE html>
 <html>
 <head>
 <style>
-div {
-  background-color: coral;
-  width: 200px;
-  height: 65px;
-  border: 1px solid black;
-  overflow-x: hidden;
-  overflow-y: scroll;
+.container {
+  position: relative;
+}
+
+.black-box {
+  position: relative;
+  border: 2px solid black;
+  height: 100px;
+  margin: 30px;
+}
+
+.gray-box {
+  position: absolute;
+  background: lightgray;
+  height: 60px;  
+  width: 70%;
+  left: 50px;
+  top: 50px;
+}
+
+.green-box {
+  position: absolute;
+  background: lightgreen;
+  width: 35%;
+  left: 270px;
+  top: -15px;
+  height: 100px;
 }
 </style>
 </head>
 <body>
 
-<h2>Overflow-x and overflow-y</h2>
+<h1>Overlapping elements</h1>
 
-<p>You can also change the overflow of content horizontally or vertically.</p>
-<p>overflow-x specifies what to do with the left/right edges of the content.</p>
-<p>overflow-y specifies what to do with the top/bottom edges of the content.</p>
+<p>If two positioned elements overlap each other without a z-index specified,
+the element defined last in the HTML code will be shown on top:</p>
 
-<div>You can use the overflow property when you want to have better control of the layout. The overflow property specifies what happens if content overflows an element's box.</div>
+<div class="container">
+  <div class="black-box">Black box</div>
+  <div class="gray-box">Gray box</div>
+  <div class="green-box">Green box</div>
+</div>
 
 </body>
 </html>
