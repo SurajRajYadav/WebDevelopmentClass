@@ -1,60 +1,22 @@
-<!-- The z-index property specifies the stack order of an element.
-The z-index property specifies the stack order of an element(which element should be palced in fron of, or behind, the others.)
-An element can have a position or negative stacked order. -->
-
-<!-- Note: z-index only works on positioned elements (position:values,) and flex items(elemts that are direct children of display:flex elemets)
-Two Way to position image:
-1. With index values
-2. Without index values -->
-
 <!DOCTYPE html>
 <html>
-<head>
-<style>
-.container {
-  position: relative;
-}
-
-.black-box {
-  position: relative;
-  border: 2px solid black;
-  height: 100px;
-  margin: 30px;
-}
-
-.gray-box {
-  position: absolute;
-  background: lightgray;
-  height: 60px;  
-  width: 70%;
-  left: 50px;
-  top: 50px;
-}
-
-.green-box {
-  position: absolute;
-  background: lightgreen;
-  width: 35%;
-  left: 270px;
-  top: -15px;
-  height: 100px;
-}
-</style>
-</head>
 <body>
 
-<h1>Overlapping elements</h1>
+<h2>JavaScript Functions</h2>
 
-<p>If two positioned elements overlap each other without a z-index specified,
-the element defined last in the HTML code will be shown on top:</p>
+<p>This example calls a function which performs a calculation and returns the result:</p>
 
-<div class="container">
-  <div class="black-box">Black box</div>
-  <div class="gray-box">Gray box</div>
-  <div class="green-box">Green box</div>
-</div>
+<p id="demo"></p>
+
+<script>
+var x = myFunction(4, 3);
+document.getElementById("demo").innerHTML = x;
+
+function myFunction(a, b) {
+
+  return a * b;
+}
+</script>
 
 </body>
 </html>
-
-
