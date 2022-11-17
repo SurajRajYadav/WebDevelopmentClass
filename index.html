@@ -1,86 +1,70 @@
--- phpMyAdmin SQL Dump
--- version 5.1.1
--- https://www.phpmyadmin.net/
---
--- Host: 127.0.0.1
--- Generation Time: Nov 17, 2022 at 05:52 AM
--- Server version: 10.4.22-MariaDB
--- PHP Version: 8.1.2
+Join Overview
+A joins is an SQL operation performed to establish a connecion between two or more database
+table based on the matching or common field between them.
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
-SET time_zone = "+00:00";
+1. Create sample tanles
+2. Types of joins
+3. Condition ON, USING, and NATURAL
+4. Outer joins and the order of evalutation.
 
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+Create sample Tables
+This sectiom provides the process of creating the sample tables
+that later sections use to describe join features.
 
---
--- Database: `eth`
---
+1st  Table
+Step		Action
+1. CREATE		CREATE TABLE cows_one (cnumber int, cbreed varchar(20));
+2. Insert		INSERT INTO cows_one (1,'Holstein');
+3. SELECT		SELECT * FROM cows_one;
 
--- --------------------------------------------------------
 
---
--- Table structure for table `etha`
---
+2nd TABLE
+Step 		Action
+1. CREATE 	CREATE TABLE cows_two (cnumber int, breeds varchar(20));
+2. Insert 		INSERT INTO cows_two(2, 'jersey');
+3. SELECT		SELECT *FROM cows_two;
 
-CREATE TABLE `etha` (
-  `candidate_no` int(11) NOT NULL,
-  `St_name` varchar(255) NOT NULL,
-  `Address` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+Conditions ON, USING, and NATURAL
+you can use the join conditions ON, USING and Natural to specify join criteria.
+-The ON clause is the most flexible. It can handle all join criteria, and, in certain cases, non-join criteria.
+-The USING and NATURAL clauses provides convenient ways to specify joins when the join columns have 
+the same name.
 
---
--- Dumping data for table `etha`
---
 
-INSERT INTO `etha` (`candidate_no`, `St_name`, `Address`) VALUES
-(1, 'suraj', 'kathmandu'),
-(2, 'Riwaj', 'Ktm'),
-(3, 'Chalise', 'Chabhil'),
-(4, 'manish', 'Dhangadi');
+Cross Join
+You cannot use an ON. USING or NATURAL condition with a cross join.
+(Returns all possinle combination of rows from two tables.)
 
--- --------------------------------------------------------
 
---
--- Table structure for table `ethb`
---
+Inner Join
+(Using a comparison operator to match rows from two tables that are based on the values in common columns
+from each table.)
+-ON join_condition
+select * from cows_one INNER JOIN cows_two ON cows_one.cnumber=cows_two.cnunumber;
 
-CREATE TABLE `ethb` (
-  `candidate_no` int(11) NOT NULL,
-  `s_name` varchar(255) DEFAULT NULL,
-  `add_cand` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+-USING join_cloumn_list
+Select * from cows-One INNER JOIN cows_two USING (cnumber);
 
---
--- Dumping data for table `ethb`
---
+-NATURAL
+select * from cows_on NATURAL INNER JOIN cows_two;
 
-INSERT INTO `ethb` (`candidate_no`, `s_name`, `add_cand`) VALUES
-(5, 'Manish', 'Doti'),
-(6, 'Kishan', 'Janakpur'),
-(7, 'Khushi', 'Golbazar');
 
---
--- Indexes for dumped tables
---
+LEFT JOIN
+(Return all the rows from the left table that are specified in the left outer join cluase, not 
+just the rows in which the columns match.)
 
---
--- Indexes for table `etha`
---
-ALTER TABLE `etha`
-  ADD PRIMARY KEY (`candidate_no`);
+RIGHT OUTER JOIN
+(Returns all the rows from the right table that are specified in the right outer join clause, not just the 
+rows in which the columns match.)
 
---
--- Indexes for table `ethb`
---
-ALTER TABLE `ethb`
-  ADD PRIMARY KEY (`candidate_no`);
-COMMIT;
+FULL OUTER JOIN
+(Returns all the rows in both the left and right tables.)
+-ON join_condition
+select * FROM cows_one FULL OUTER JOIN cows_two ON cows_one.cnumber=cows_two.cnumber;
 
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+-USING join_cloumn_list
+select * from cows_one FULL OUTER JOIN cows_two using (cnumber);
+
+-NATURAL
+select * from cows_one NATURAL FULL JOIN cows_two;
