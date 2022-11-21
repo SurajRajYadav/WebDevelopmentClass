@@ -1,107 +1,239 @@
--- phpMyAdmin SQL Dump
--- version 5.1.1
--- https://www.phpmyadmin.net/
---
--- Host: 127.0.0.1
--- Generation Time: Nov 18, 2022 at 08:35 AM
--- Server version: 10.4.22-MariaDB
--- PHP Version: 8.1.2
+Chapter 1:
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
-SET time_zone = "+00:00";
+Retrieving Data Using the SQL SELECT statement
+-> selecting all columns: [SELECT * from departments;]
+-> selecting specific Columns: [Selelct department_id, location_id from departments;]
+
+Arithmetic Expressions
+-> Using Arithmetic Opeators: [SELECT last_name, salary, salary+300 from employees;]
+-> Operator Precedence: [SELECT last_name, salary, 12*salary+100 from employees;]
+-> Select Last_name, salary from employeees;4
+
+Defining a NULL values
+-> Select last_name, 12*salary from employees;
+
+Defining a column Alias
+-> Select last_nmae AS name, Commission_Pcs AS comm from employees;
+-> Select last_name "Name", salary*12 "Annula Salary" from employees;
+
+Concatenation Operators
+-> Select last_name ||  job_is AS "Employee" from employees;
+
+Literal Character Strings
+Using literald character string
+-> select last_name || 'is a'||job_is AS "Employees Details" from employees;
+
+Alternative Quote(q) Operator
+-> Select department_name ||q'[,It's Assigned Manager Id:]' Manager_is AS  "Department and Manager" from departments;
+
+Duplicate Rows
+-> Select department_is from employees;
+-> select Distinct department_is from employees;
+
+Displaying Table Structure
+-> Describe Employees;
+=============================================================
+Chapter 2 : Restricting and Sorting Data
+Limiting rhe rows that are selected
+using the where clause
+-> Select employee_id, last_name, job_id from employees where department_id = 90;
+Character string and date
+-> Select last_name, department_id, job_id from employees where last_name='Yadav';
+
+Comparision Conditions
+ using comparision conditions
+-> Select last_name, salary from employees where salary<=3000;
+
+Using the Between Conditions
+-> Selelct last_name, salary from emplyees where salary between 2000 and 3000;
+
+using the IN conditions
+-> select employees_is, last_name, manager_is from employees where manager_id IN (100,101,200);
+
+Using LIKE condition
+-> Select first_name from employees where first-name LIKE 's%';
+Note:
+% - represents multiple character 
+_ - represents single character
+
+Using NULL condition
+Selct  last_name, manager_id from mployees where manager_id IS NULL;
+
+Logical Conditions
+Using AND operatoe
+-> Select employee_id, last_name, salary from employees where salary >= 10000 AND job_id LIKE '%MAN%';
+
+Using OR operator
+-> Select employee_id, last_name from employees where salary <=10000 OR job_id LIKE %MAN%;
+
+Using NOT operator
+-> Select last_name, job_id from employees where JOb_id NOT IN('IT_PROG', 'ST_CLERK');
+
+USING THE ORDER BY CLAUSE
+-> Select last_name , job_id from employees ORDER BY hire_date:
+-> Select last_nmae, department_id from employees ORDER BY department_id, salary DESC;
+===============================================================
+CHAPTER 3: Usinf Single Row Functions to Customize OUTPUT
+
+Using case manipulation Functions
+->Select employee_id, last_nmae from employees where last_name='yadav';
+
+Number Functions
+(Round, TRUNC, MOD)
+-> seleect round(43.953,2) from dual;
 
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+Working with Dates
+-> Select last_name, hire_date from employees where hire_date <'01-01-2001';
 
---
--- Database: `w_3nf`
---
+===============================================================================
+Chapter 4:  REPORTING AGGREGATED DATA USING THE GROUP FUNCTIONS
+Types of group functions
+1. AVG
+2. SUM
+3. COUNT
+4. MAX'
+5. MIN
+6. STDDEV
 
--- --------------------------------------------------------
+using the AVG and sum functions
+-> select avg(salary), sum(salary) from employees where job_is LIKE '%MAN%';
 
---
--- Table structure for table `customers`
---
+Usinf teh count functions
+-> select last_name, hire_date from employees where department_id=50;
 
-CREATE TABLE `customers` (
-  `Customer_id` int(11) NOT NULL,
-  `Customer_name` varchar(255) NOT NULL,
-  `Customer_Address` varchar(255) NOT NULL,
-  `Intial_date` date NOT NULL,
-  `City` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+using distinct function
+-> seelct count(Disctint(department_id)) from employees;
 
--- --------------------------------------------------------
+Creating Groups of Date: Group By Clause
+-> Select department_id from employees GROUP BY department_id;
+-> selelct avg(salary ) from employees GROUP BY department_id;
 
---
--- Table structure for table `item_details`
---
+usinf the group by clause on multiple columns
+-> Select department-id, sum(salary) from employees GROUP BY department_id, job_id;
 
-CREATE TABLE `item_details` (
-  `Item_no` int(11) NOT NULL,
-  `Item_price` int(11) NOT NULL,
-  `Total_cost` int(11) NOT NULL,
-  `Total_item` int(11) NOT NULL,
-  `order_number` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+Using the Having Clause
+-> Select department_id, max(salary) from employees GROUP BY department_id HAVING MAX(SALARY>100000);
+==========================================================================================
+CHAPTER 5: JOIN OVERVIEW
 
--- --------------------------------------------------------
+========================================================================
+Chapter 6: USING Subquries to solve quries
 
---
--- Table structure for table `order_summary`
---
+Using a subquery
+-> select last_nmae from employees where salary >(select salary from employees where last_name='suraj');
 
-CREATE TABLE `order_summary` (
-  `Order_number` int(11) NOT NULL,
-  `Account_no` int(11) NOT NULL,
-  `customer_id_ref` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+using Group Functions in a Subquery
+-> select last_name, job_id, salary from employees WHERE salary =(Select MIN(salary) from employees);
 
---
--- Indexes for dumped tables
---
+==================================================================
+Chapter 7: Using teh set operators
+TYpes of Set operators
+(Set operators can be used to combine two tables anda returns data)
+1. UNION/ALL
+2. Intersect
+3. MINUS
+ Using the UNION operator
+-> Select employee_id, job_id from employees UNION Select employee_id, job_id from job_history;
 
---
--- Indexes for table `customers`
---
-ALTER TABLE `customers`
-  ADD PRIMARY KEY (`Customer_id`);
+======================================================================
+Chapter 8: Manipulting Data
 
---
--- Indexes for table `item_details`
---
-ALTER TABLE `item_details`
-  ADD PRIMARY KEY (`Item_no`),
-  ADD KEY `order_number` (`order_number`);
+1. insert
+2. Update
+3. Delete
+4. Comtrol Transaction
 
---
--- Indexes for table `order_summary`
---
-ALTER TABLE `order_summary`
-  ADD PRIMARY KEY (`Order_number`),
-  ADD KEY `customer_id_ref` (`customer_id_ref`);
+Creating a script
+Copying Rows from another table
+-> Insrt into sales_rep (is, name, salary, commission_pct)
+select employees_id, last_name, salary, commission_pct from employees where job_id LIKE '%MAN%';
 
---
--- Constraints for dumped tables
---
+Updating rows in a table
+-> Upadte employees
+SET department_id=270
+where employees_id=13;
 
---
--- Constraints for table `item_details`
---
-ALTER TABLE `item_details`
-  ADD CONSTRAINT `item_details_ibfk_1` FOREIGN KEY (`order_number`) REFERENCES `order_summary` (`Order_number`);
+Delete Statement
+rows from a table
+-> Delete from department
+where department_name='Finance';
 
---
--- Constraints for table `order_summary`
---
-ALTER TABLE `order_summary`
-  ADD CONSTRAINT `order_summary_ibfk_1` FOREIGN KEY (`customer_id_ref`) REFERENCES `customers` (`Customer_id`) ON DELETE CASCADE;
-COMMIT;
+Truncate statement
+-> TRUNCATE TABLE department;
 
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+Transaction control
+-> rollback
+-> commit
+
+=================================================
+CHAPTER 9: USING DDL statement to create ans manage tables
+Database object
+1. table
+2. view
+3. swquence
+4. Index
+5. Synonym
+
+Referencing another users' table
+Create table
+
+Including constraints
+1. Unique
+2. NOT NULL
+3. PRIMARY KEY
+4. FOREIGN KEY
+5. CHECK
+
+Dropping a tab;e
+1. DROP TABLE department;
+==================================================
+Chapter 10: Creating other schema objects
+
+create a view
+-> Create view suraj
+AS select employees_id, last_name, salary from employees where department_id=80;
+
+Retrieving data from a view
+-> select * from suraj;
+
+mODIFY A VIEW
+CREATING A COMPLEX VIEW
+
+========================================
+CHAPTER 11: Controlling a user Accecss
+ 
+creater users
+-> Create user suraj
+Identified by suraj;
+
+
+Granting system privilelges
+-> GRANT create session, create tablem create sequence, create view
+to suraj;
+
+ Change user password
+-> ALTER user suraj
+Identified by yadav;
+
+Revoing object privileges
+-> REVOKE select, insert ON separtments from suraj;
+
+================================
+CHAPTER 12: mANGE SCHEMA OBJECT
+1. Add contraints
+2. Create index
+3. create indexs using create table stament
+4. create function based index
+5. Droup columns ans set column UNUSED
+6. Perform flashback operations
+7. create and use external tables
+
+
+Alter can be used to:
+1. ADD
+2. MODIFY
+3. DROP 
+
+========================================
+Suraj Raj Yadav
