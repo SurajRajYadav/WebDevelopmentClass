@@ -1,18 +1,15 @@
-<!DOCTYPE html>
-<html>
-<body>
+<?php
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "crud";
 
-<?php 
-$x = 2; 
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+// Check connection
+if ($conn->connect_error) {
+  die("Connection failed: " . $conn->connect_error);
+}
+echo "Db connected succesfully";
 
-while($x <= 100) {
-    $x+=2;
-    if ($x==60){
-    continue;
-    }
-    echo "The number is: $x <br>";
-} 
 ?>
-
-</body>
-</html>
