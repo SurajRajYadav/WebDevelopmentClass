@@ -1,0 +1,4 @@
+#Inner Join
+INNER JOIN returns the common and the matching records between the tables.
+#Outer Join
+OUTER JOIN returns all the records from the database tables. 
